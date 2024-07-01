@@ -71,14 +71,12 @@ year: {{year}}
 
 ## License
 
-MIT License.
+Code contained in this project is released under the [MIT License](https://spdx.org/licenses/MIT.html) as specified in [`LICENSE.md`][citater-license].
+This license grants you the freedom to use, modify, and distribute it as long as you include the original copyright notice contained in [`LICENSE.md`][citater-license] and the following disclaimer.
 
-## Contributors
+> Portions of this code were incorporated and adapted with permission from [obsidian-citater-plugin](https://gitlab.com/oasci/software/obsidian-citater-plugin) by OASCI under the [MIT License](https://gitlab.com/oasci/software/obsidian-citater-plugin/-/blob/main/LICENSE.md).
 
--   Jon Gauthier ([hans](https://github.com/hans))
--   [raineszm](https://github.com/raineszm)
--   [Luke Murray](https://lukesmurray.com/)
--   [valmaev](https://github.com/valmaev)
+[citater-license]: https://gitlab.com/oasci/software/obsidian-citater-plugin/-/blob/main/LICENSE.md
 
 [1]: https://github.com/citation-style-language/schema#csl-json-schema
 [2]: https://retorque.re/zotero-better-bibtex/
