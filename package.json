@@ -1,7 +1,7 @@
 {
   "name": "obsidian-citater-plugin",
   "version": "0.1.0",
-  "description": "Automatically search and insert citations from a Zotero library",
+  "description": "Automatically search and insert citations from a BibTeX file.",
   "main": "main.js",
   "scripts": {
     "dev": "rollup --config rollup.config.js -w",
@@ -17,7 +17,7 @@
     ]
   },
   "keywords": [],
-  "author": "Jon Gauthier",
+  "author": "OASCI",
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^15.1.0",

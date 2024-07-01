@@ -1,10 +1,10 @@
 {
 	"id": "obsidian-citater-plugin",
-	"name": "Citations",
+	"name": "Citater",
 	"version": "0.1.0",
-	"minAppVersion": "0.9.20",
-	"description": "Automatically search and insert citations from a Zotero library",
-	"author": "Jon Gauthier",
-	"authorUrl": "http://foldl.me",
+	"minAppVersion": "0.15.9",
+	"description": "Automatically search and insert citations from a BibTeX file.",
+	"author": "OASCI",
+	"authorUrl": "https://gitlab.com/oasci",
 	"isDesktopOnly": true
 }
