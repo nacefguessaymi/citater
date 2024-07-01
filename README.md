@@ -1,4 +1,4 @@
-# obsidian-citater-plugin
+# Obsidian citater plugin
 
 This plugin for [Obsidian](https://obsidian.md) integrates your academic reference manager with the Obsidian editing experience.
 
