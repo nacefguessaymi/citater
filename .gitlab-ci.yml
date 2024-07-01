@@ -5,11 +5,13 @@ stages:
 variables:
   NODE_VERSION: "12"
 
+before_script:
+  - npm ci --no-optional
+
 build:
   stage: build
   image: node:${NODE_VERSION}
   script:
-    - npm ci --no-optional
     - npm run build --if-present
 
 test:
