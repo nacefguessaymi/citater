@@ -202,7 +202,7 @@ describe('biblatex regression tests', () => {
     jest.spyOn(global.console, 'warn').mockImplementation(warnCallback);
 
     expect(load).not.toThrowError();
-    expect(warnCallback.mock.calls.length).toBe(1);
+    expect(warnCallback.mock.calls.length).toBe(0);
   });
 
   test('regression fe15ef6 (fatal parser error handling)', () => {
