@@ -3,7 +3,11 @@ name: Release Obsidian plugin
 on:
   push:
     tags:
-      - "*"
+      - "v*"
+
+permissions:
+  contents: write
+  packages: write
 
 jobs:
   build:
@@ -26,9 +30,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "GITHUB_REF: $GITHUB_REF"
           tag="${GITHUB_REF#refs/tags/}"
-
-          gh release create "$tag" \
-            --title="$tag" \
-            --draft \
-            main.js manifest.json styles.css
+          gh release create "$tag" --title="$tag" --draft main.js manifest.json styles.css
