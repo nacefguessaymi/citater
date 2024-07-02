@@ -61,7 +61,7 @@ Complete the following tasks to release a new `citater` version.
 2.  Export the new version to the environment variable `citater_package_version`.
     For example, `export citater_package_version='0.1.2'.
 3.  Create a new subheading in `CHANGELOG.md` with any updates specifying the new version and data of release.
-    For example, `## [0.1.2] - 2024-07-2`.
+    For example, `## [0.1.2] - 2024-07-02`.
     Ensure that you leave the `## [Unreleased]` above this new release.
 4.  Run `npm run bump` to automatically bump all relevant version strings.
     Check that all staged files in git are correct.
