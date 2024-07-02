@@ -2,12 +2,10 @@ default:
   image: node:20
 
 stages:
-  - build
   - test
 
 test:
   stage: test
-  image: node:${NODE_VERSION}
   script:
     - npm ci
     - npm test
