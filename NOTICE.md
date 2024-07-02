@@ -1,6 +1,6 @@
 # Notice
 
-`obsidian-citater-plugin` contains a portion of code from the following sources.
+`citater` contains a portion of code from the following sources.
 These contributions are used or adapted with permission.
 
 ## [obsidian-citation-plugin](https://github.com/hans/obsidian-citation-plugin)

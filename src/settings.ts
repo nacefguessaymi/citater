@@ -215,12 +215,7 @@ export class CitationSettingTab extends PluginSettingTab {
         text:
           ' variable, which contains the full object representation of the ' +
           'reference as used internally by the plugin. See the ',
-      }),
-      createEl('a', {
-        text: 'plugin documentation',
-        href: 'http://www.foldl.me/obsidian-citater-plugin/classes/entry.html',
-      }),
-      createSpan({ text: " for information on this object's structure." }),
+      })
     );
 
     containerEl.createEl('h3', { text: 'Literature note templates' });
@@ -254,7 +249,7 @@ export class CitationSettingTab extends PluginSettingTab {
       .addText((input) =>
         this.buildValueInput(input, 'alternativeMarkdownCitationTemplate'),
       );
-    
+
     containerEl.createEl('h3', { text: 'BibTeX Adder' });
 
     new Setting(containerEl)
@@ -286,7 +281,7 @@ export class CitationSettingTab extends PluginSettingTab {
           }
         })
       );
-    
+
     new Setting(containerEl)
       .setName('Ribbon action')
       .setDesc('Add action to ribbon (reload required).')
