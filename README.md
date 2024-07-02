@@ -53,6 +53,20 @@ year: {{year}}
 {{abstract}}
 ```
 
+## Releases
+
+Complete the following tasks to release a new `citater` version.
+
+1.  Check that all tests pass by running `npm run tests`.
+2.  Export the new version to the environment variable `citater_package_version`.
+    For example, `export citater_package_version='0.1.2'.
+3.  Create a new subheading in `CHANGELOG.md` with any updates specifying the new version and data of release.
+    For example, `## [0.1.2] - 2024-07-2`.
+    Ensure that you leave the `## [Unreleased]` above this new release.
+4.  Run `npm run bump` to automatically bump all relevant version strings.
+    Check that all staged files in git are correct.
+5.  Run `npm run release` to commit, release, and push a new tag.
+
 ## License
 
 Code contained in this project is released under the [MIT License](https://spdx.org/licenses/MIT.html) as specified in [`LICENSE.md`][citater-license].
