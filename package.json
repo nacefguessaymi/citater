@@ -10,7 +10,7 @@
 		"tests": "jest",
 		"docs": "typedoc src/types.ts",
 		"bump": "node version-bump.mjs && git add .",
-		"release": "git commit -m bump: v$citater_package_version && git tag v$citater_package_version && git push && git push --tags"
+		"release": "git commit -m $citater_package_version && git tag v$citater_package_version && git push && git push --tags"
 	},
 	"keywords": [],
 	"author": "OASCI",
