@@ -1,9 +1,9 @@
+default:
+  image: node:20
+
 stages:
   - build
   - test
-
-variables:
-  NODE_VERSION: "12"
 
 test:
   stage: test
