@@ -1,6 +1,6 @@
 {
 	"name": "citater",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Automatically search and insert citations from a BibTeX file.",
 	"main": "main.js",
 	"scripts": {
