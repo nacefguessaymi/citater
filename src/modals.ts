@@ -7,9 +7,16 @@ import {
   renderMatches,
   SearchMatches,
   SearchMatchPart,
+  Modal,
+  Setting,
+  normalizePath,
+  TFile
 } from 'obsidian';
 import CitationPlugin from './main';
 import { Entry } from './types';
+
+import { addStr } from './keys';
+import { getBibtex } from './retrieve';
 
 // Stub some methods we know are there..
 interface FuzzySuggestModalExt<T> extends FuzzySuggestModal<T> {
@@ -276,5 +283,90 @@ export class InsertCitationModal extends SearchModal {
     this.plugin
       .insertMarkdownCitation(item.id, isAlternative)
       .catch(console.error);
+  }
+}
+
+
+export class BibtexAdderModal extends Modal {
+  doiValue: string;
+  settings: any;
+
+  constructor(
+    app: App,
+    settings: any
+  ) {
+    super(app);
+    this.settings = settings;
+  }
+
+  onOpen() {
+    const { contentEl } = this;
+    contentEl.createEl("h1", { text: "Add BibTeX entry from DOI" });
+
+    new Setting(contentEl).setName("DOI").addText((text) =>
+      text.setValue(this.doiValue).onChange((value) => {
+        this.doiValue = value;
+      })
+    );
+
+    new Setting(contentEl).addButton((btn) =>
+      btn
+        .setButtonText("Add")
+        .setCta()
+        .onClick(async () => {
+          this.close();
+
+          let bibtex_path = this.settings.bibtexLocation;
+
+          // Get BibTex data
+          var [ bibtex_key, bibtex_string ] = await getBibtex(this.doiValue);
+
+          // Indent BibTeX string
+          if (this.settings.indentBibtex) {
+            bibtex_string = bibtex_string.replace(
+              RegExp(`{${bibtex_key}, title=`, 'g'), `{${bibtex_key},\n  title=`
+            )
+            bibtex_string = bibtex_string.replace(
+              RegExp(`},`, 'g'), `},\n  `
+            )
+            bibtex_string = addStr(
+              bibtex_string, bibtex_string.length-2,
+              `\n`
+            )
+          }
+
+          // Get BibTeX file.
+          let bibtexFile = this.app.vault.getAbstractFileByPath(
+            normalizePath(bibtex_path)
+          ) as TFile;
+          
+          if (bibtexFile == null) {
+            // Create file with BibTeX entry if it does not already exist.
+            this.app.vault.create(bibtex_path, bibtex_string);
+            new Notice("Created BibTeX file.")
+            new Notice(`Added ${bibtex_key}.`)
+          } else {
+            // File exists.
+            // Check if BibTeX key already exists.
+            var bibtex_content = await this.app.vault.read(bibtexFile)
+            if (bibtex_content.includes(`{${bibtex_key},`)) {
+              new Notice(`${bibtex_key} already exists.`)
+            } else {
+              // Add BibTeX entry at the top of file.
+              // When the Citations plugin loads articles it does so in order
+              // inside the bib file. To make it easier to find when creating
+              // a literature note we put it at the top
+              let new_bibtex_content = bibtex_string + bibtex_content;
+              this.app.vault.modify(bibtexFile, new_bibtex_content)
+              new Notice(`Added ${bibtex_key}.`)
+            }
+          }
+        })
+    );
+  }
+
+  onClose() {
+    let { contentEl } = this;
+    contentEl.empty();
   }
 }

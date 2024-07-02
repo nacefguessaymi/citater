@@ -22,9 +22,10 @@ import {
   InsertNoteLinkModal,
   InsertNoteContentModal,
   OpenNoteModal,
+  BibtexAdderModal
 } from './modals';
 import { VaultExt } from './obsidian-extensions.d';
-import { CitationSettingTab, CitationsPluginSettings } from './settings';
+import { CitationSettingTab, CitationsPluginSettings, CITATER_DEFAULT_SETTINGS } from './settings';
 import {
   Entry,
   EntryData,
@@ -72,25 +73,9 @@ export default class CitationPlugin extends Plugin {
   }
 
   async loadSettings(): Promise<void> {
-    this.settings = new CitationsPluginSettings();
-
-    const loadedSettings = await this.loadData();
-    if (!loadedSettings) return;
-
-    const toLoad = [
-      'citationExportPath',
-      'citationExportFormat',
-      'literatureNoteTitleTemplate',
-      'literatureNoteFolder',
-      'literatureNoteContentTemplate',
-      'markdownCitationTemplate',
-      'alternativeMarkdownCitationTemplate',
-    ];
-    toLoad.forEach((setting) => {
-      if (setting in loadedSettings) {
-        (this.settings as IIndexable)[setting] = loadedSettings[setting];
-      }
-    });
+    this.settings = Object.assign(
+      {}, CITATER_DEFAULT_SETTINGS, await this.loadData()
+    );
   }
 
   async saveSettings(): Promise<void> {
@@ -177,6 +162,23 @@ export default class CitationPlugin extends Plugin {
       callback: () => {
         const modal = new InsertCitationModal(this.app, this);
         modal.open();
+      },
+    });
+
+    // This creates an icon in the left ribbon.
+    if (this.settings.addRibbonAction) {
+      const ribbonIconEl = this.addRibbonIcon('paper-plane', 'Add BibTeX from DOI', (evt: MouseEvent) => {
+        // Called when the user clicks the icon.
+        new BibtexAdderModal(this.app, this.settings).open();
+      });
+    }
+
+    // Command that creates a note from DOI information.
+    this.addCommand({
+      id: "add-bibtex-modal",
+      name: "Add BibTeX entry from DOI",
+      callback: () => {
+        new BibtexAdderModal(this.app, this.settings).open();
       },
     });
 

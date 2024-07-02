@@ -17,19 +17,35 @@ const CITATION_DATABASE_FORMAT_LABELS: Record<DatabaseType, string> = {
 
 export class CitationsPluginSettings {
   public citationExportPath: string;
-  citationExportFormat: DatabaseType = 'csl-json';
+  citationExportFormat: DatabaseType;
 
-  literatureNoteTitleTemplate = '@{{citekey}}';
-  literatureNoteFolder = 'Reading notes';
-  literatureNoteContentTemplate: string =
-    '---\n' +
+  literatureNoteTitleTemplate: string;
+  literatureNoteFolder: string;
+  literatureNoteContentTemplate: string;
+  markdownCitationTemplate: string;
+  alternativeMarkdownCitationTemplate: string;
+
+  bibtexLocation: string;
+  indentBibtex: boolean;
+  addRibbonAction: boolean;
+}
+
+export const CITATER_DEFAULT_SETTINGS: CitationsPluginSettings = {
+  citationExportFormat: 'csl-json',
+
+  literatureNoteTitleTemplate: '@{{citekey}}',
+  literatureNoteFolder: 'Reading notes',
+  literatureNoteContentTemplate: '---\n' +
     'title: {{title}}\n' +
     'authors: {{authorString}}\n' +
     'year: {{year}}\n' +
-    '---\n\n';
-
-  markdownCitationTemplate = '[@{{citekey}}]';
-  alternativeMarkdownCitationTemplate = '@{{citekey}}';
+    '---\n\n',
+  markdownCitationTemplate: '[@{{citekey}}]',
+  alternativeMarkdownCitationTemplate: '@{{citekey}}',
+  bibtexLocation: 'bibtex.md',
+  indentBibtex: true,
+  addRibbonAction: true,
+  citationExportPath: ''
 }
 
 export class CitationSettingTab extends PluginSettingTab {
@@ -237,6 +253,52 @@ export class CitationSettingTab extends PluginSettingTab {
       .setName('Markdown secondary citation template')
       .addText((input) =>
         this.buildValueInput(input, 'alternativeMarkdownCitationTemplate'),
+      );
+    
+    containerEl.createEl('h3', { text: 'BibTeX Adder' });
+
+    new Setting(containerEl)
+      .setName('BibTeX Location')
+      .setDesc('Set the location of the BibTeX file.')
+      .addTextArea(text => {
+        text
+          .setValue(this.plugin.settings.bibtexLocation)
+          .onChange(async (value) => {
+              try {
+                  this.plugin.settings.bibtexLocation = value;
+                  await this.plugin.saveSettings();
+              } catch (e) {
+                  return false;
+              }
+          })
+      });
+
+    new Setting(containerEl)
+      .setName('Indent BibTeX entry')
+      .setDesc('Indent each item.')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.indentBibtex)
+        .onChange(async (value) => {
+          try {
+              this.plugin.settings.indentBibtex = value;
+              await this.plugin.saveSettings();
+          } catch (e) {
+              return false;
+          }
+        })
+      );
+    
+    new Setting(containerEl)
+      .setName('Ribbon action')
+      .setDesc('Add action to ribbon (reload required).')
+      .addToggle(toggle => toggle.setValue(this.plugin.settings.addRibbonAction)
+        .onChange(async (value) => {
+          try {
+              this.plugin.settings.addRibbonAction = value;
+              await this.plugin.saveSettings();
+          } catch (e) {
+              return false;
+          }
+        })
       );
   }
 
