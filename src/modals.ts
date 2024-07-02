@@ -221,8 +221,6 @@ export class OpenNoteModal extends SearchModal {
         } else {
           open(`file://${pdfPaths[0]}`);
         }
-      } else {
-        open(item.zoteroSelectURI);
       }
     }
   }
@@ -339,7 +337,7 @@ export class BibtexAdderModal extends Modal {
           let bibtexFile = this.app.vault.getAbstractFileByPath(
             normalizePath(bibtex_path)
           ) as TFile;
-          
+
           if (bibtexFile == null) {
             // Create file with BibTeX entry if it does not already exist.
             this.app.vault.create(bibtex_path, bibtex_string);

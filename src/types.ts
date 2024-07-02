@@ -30,7 +30,6 @@ export const TEMPLATE_VARIABLES = {
   titleShort: '',
   URL: '',
   year: 'Publication year',
-  zoteroSelectURI: 'URI to open the reference in Zotero',
 };
 
 export class Library {
@@ -64,7 +63,6 @@ export class Library {
       titleShort: entry.titleShort,
       URL: entry.URL,
       year: entry.year?.toString(),
-      zoteroSelectURI: entry.zoteroSelectURI,
     };
 
     return { entry: entry.toJSON(), ...shortcuts };
@@ -190,13 +188,6 @@ export abstract class Entry {
     return this._note
       ?.map((el) => el.replace(/(zotero:\/\/.+)/g, '[Link]($1)'))
       .join('\n\n');
-  }
-
-  /**
-   * A URI which will open the relevant entry in the Zotero client.
-   */
-  public get zoteroSelectURI(): string {
-    return `zotero://select/items/@${this.id}`;
   }
 
   toJSON(): Record<string, unknown> {
