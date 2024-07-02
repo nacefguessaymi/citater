@@ -1,7 +1,7 @@
 {
-	"id": "obsidian-citater-plugin",
+	"id": "citater",
 	"name": "Citater",
-	"version": "0.1.0",
+	"version": "0.0.1",
 	"minAppVersion": "0.15.9",
 	"description": "Automatically search and insert citations from a BibTeX file.",
 	"author": "OASCI",

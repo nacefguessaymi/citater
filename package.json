@@ -1,6 +1,6 @@
 {
   "name": "obsidian-citater-plugin",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Automatically search and insert citations from a BibTeX file.",
   "main": "main.js",
   "scripts": {
