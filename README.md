@@ -11,7 +11,7 @@ In the meantime, you can manually install the plugin by downloading `main.js` an
 
 The plugin offers four simple features at the moment:
 
-1.  **Open literature note** (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>O</kbd>): automatically create or open a literature note for a particular reference.
+1.  **Open literature note** (<kbd>Ctrl</kbd>+<kbd>L</kbd>): automatically create or open a literature note for a particular reference.
     The title, folder, and initial content of the note can be configured in the plugin settings.
 2.  **Insert literature note reference** (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd>): insert a link to the literature note corresponding to a particular reference.
 3.  **Insert literature note content in the current pane** (no hotkey by default): insert content describing a particular reference into the current pane.

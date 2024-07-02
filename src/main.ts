@@ -121,7 +121,7 @@ export default class CitationPlugin extends Plugin {
     this.addCommand({
       id: 'open-literature-note',
       name: 'Open literature note',
-      hotkeys: [{ modifiers: ['Ctrl', 'Shift'], key: 'o' }],
+      hotkeys: [{ modifiers: ['Ctrl'], key: 'l' }],
       callback: () => {
         const modal = new OpenNoteModal(this.app, this);
         modal.open();
