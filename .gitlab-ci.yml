@@ -8,4 +8,4 @@ test:
   stage: test
   script:
     - npm ci
-    - npm tests
+    - npm run tests
