@@ -7,7 +7,7 @@
     "dev": "rollup --config rollup.config.js -w",
     "build": "rollup --config rollup.config.js",
     "lint": "eslint . --ext .ts,.tsx",
-    "test": "jest",
+    "tests": "jest",
     "docs": "typedoc src/types.ts",
     "release": "standard-version"
   },
