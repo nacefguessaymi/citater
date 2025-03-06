@@ -43,6 +43,7 @@ export function gscholarBibtexKey(crossrefData: any): string {
   author_last_name = normString(author_last_name);
   author_last_name = getFirstWord(author_last_name);
   let year = crossrefData.published['date-parts'][0][0];
+  let month = crossrefData.published['date-parts'][0][1];
   let title = crossrefData.title[0].toLowerCase();
   let title_first_word = getFirstWord(title);
   let bibtex_key = author_last_name + year + title_first_word;

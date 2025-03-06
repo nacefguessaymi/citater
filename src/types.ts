@@ -30,6 +30,7 @@ export const TEMPLATE_VARIABLES = {
   titleShort: '',
   URL: '',
   year: 'Publication year',
+  month: 'Publication month',
 };
 
 export class Library {
@@ -63,6 +64,7 @@ export class Library {
       titleShort: entry.titleShort,
       URL: entry.URL,
       year: entry.year?.toString(),
+      month: entry.month?.toString(),
     };
 
     return { entry: entry.toJSON(), ...shortcuts };
